@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { GoogleLogin, googleLogout, useGoogleLogin } from "@react-oauth/google";
+import { googleLogout, useGoogleLogin, GoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import shareVideo from "../assets/share.mp4";
 import logo from "../assets/logowhite.png";
 import axios from "axios";
+import { client, urlFor } from "../client";
 
 const Login = () => {
+  const [user, setUser] = useState(null);
+  const [profile, setProfile] = useState(null);
+  const navigate = useNavigate();
+
   const responseGoogle = (response) => {
-    console.log(response.data);
     localStorage.setItem("user", JSON.stringify(response.data));
 
     const { name, id, picture } = response.data;
@@ -19,13 +23,17 @@ const Login = () => {
       userName: name,
       image: picture,
     };
+
+    client.createIfNotExists(doc).then(() => {
+      navigate("/", { replace: true });
+    });
   };
 
-  const [user, setUser] = useState(null);
-  const [profile, setProfile] = useState(null);
-
   const login = useGoogleLogin({
-    onSuccess: (codeResponse) => setUser(codeResponse),
+    onSuccess: (codeResponse) => {
+      setUser(codeResponse);
+      console.log(codeResponse);
+    },
     onError: (error) => console.log("Login Failed:", error),
   });
 
@@ -53,6 +61,7 @@ const Login = () => {
   const logOut = () => {
     googleLogout();
     setProfile(null);
+    localStorage.clear();
   };
 
   return (
@@ -94,23 +103,7 @@ const Login = () => {
                 Sign in with Google 🚀{" "}
               </button>
             )}
-            {/* <GoogleLogin
-              clientId={process.env.REACT_APP_GOOGLE_API_TOKEN}
-              render={(renderProps) => (
-                <button
-                  type="button"
-                  className="bg-mainColor flex justify-center items-center p-3 rounded-lg cursor-pointer outline-none"
-                  onClick={renderProps.onClick}
-                  disabled={renderProps.disabled}
-                >
-                  <FcGoogle className="mr-4" />
-                  SIGN in with GOOGLE
-                </button>
-              )}
-              onSuccess={responseGoogle}
-              onError={responseGoogle}
-              cookiePolicy="single_host_origin"
-            /> */}
+            {/* <GoogleLogin onSuccess={responseGoogle} onError={responseGoogle} /> */}
           </div>
         </div>
       </div>

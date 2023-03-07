@@ -10,13 +10,13 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 const clientId = process.env.REACT_APP_GOOGLE_API_TOKEN;
 
 root.render(
-  <React.StrictMode>
-    <GoogleOAuthProvider clientId={clientId}>
+  <GoogleOAuthProvider clientId={clientId}>
+    <React.StrictMode>
       <Router>
         <App />
       </Router>
-    </GoogleOAuthProvider>
-  </React.StrictMode>
+    </React.StrictMode>
+  </GoogleOAuthProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
