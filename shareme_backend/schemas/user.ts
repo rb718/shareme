@@ -9,6 +9,11 @@ export default {
             type: 'string',
         },
         {
+            name: 'googleId',
+            title: 'GoogleID',
+            type: 'string',
+        },
+        {
             name: 'image',
             title: 'Image',
             type: 'string',

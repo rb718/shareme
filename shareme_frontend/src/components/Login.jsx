@@ -20,6 +20,7 @@ const Login = () => {
     const doc = {
       _id: id,
       _type: "user",
+      googleId: id,
       userName: name,
       image: picture,
     };
@@ -32,7 +33,6 @@ const Login = () => {
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
       setUser1(codeResponse);
-      // console.log(codeResponse);
     },
     onError: (error) => console.log("Login Failed:", error),
   });
