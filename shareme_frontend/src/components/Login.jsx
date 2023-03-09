@@ -8,7 +8,7 @@ import axios from "axios";
 import { client } from "../client";
 
 const Login = () => {
-  const [user1, setUser1] = useState(null);
+  const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
   const navigate = useNavigate();
 
@@ -32,19 +32,19 @@ const Login = () => {
 
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
-      setUser1(codeResponse);
+      setUser(codeResponse);
     },
     onError: (error) => console.log("Login Failed:", error),
   });
 
   useEffect(() => {
-    if (user1) {
+    if (user) {
       axios
         .get(
-          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user1.access_token}`,
+          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
           {
             headers: {
-              Authorization: `Bearer ${user1.access_token}`,
+              Authorization: `Bearer ${user.access_token}`,
               Accept: "application/json",
             },
           }
@@ -55,7 +55,7 @@ const Login = () => {
         })
         .catch((err) => console.log(err));
     }
-  }, [user1]);
+  }, [user]);
 
   // log out function to log the user out of google and set the profile array to null
   const logOut = () => {
