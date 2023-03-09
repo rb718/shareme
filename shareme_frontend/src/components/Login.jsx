@@ -5,10 +5,10 @@ import { FcGoogle } from "react-icons/fc";
 import shareVideo from "../assets/share.mp4";
 import logo from "../assets/logowhite.png";
 import axios from "axios";
-import { client, urlFor } from "../client";
+import { client } from "../client";
 
 const Login = () => {
-  const [user, setUser] = useState(null);
+  const [user1, setUser1] = useState(null);
   const [profile, setProfile] = useState(null);
   const navigate = useNavigate();
 
@@ -31,20 +31,20 @@ const Login = () => {
 
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
-      setUser(codeResponse);
-      console.log(codeResponse);
+      setUser1(codeResponse);
+      // console.log(codeResponse);
     },
     onError: (error) => console.log("Login Failed:", error),
   });
 
   useEffect(() => {
-    if (user) {
+    if (user1) {
       axios
         .get(
-          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
+          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user1.access_token}`,
           {
             headers: {
-              Authorization: `Bearer ${user.access_token}`,
+              Authorization: `Bearer ${user1.access_token}`,
               Accept: "application/json",
             },
           }
@@ -55,7 +55,7 @@ const Login = () => {
         })
         .catch((err) => console.log(err));
     }
-  }, [user]);
+  }, [user1]);
 
   // log out function to log the user out of google and set the profile array to null
   const logOut = () => {
