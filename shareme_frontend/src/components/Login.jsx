@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { googleLogout, useGoogleLogin, GoogleLogin } from "@react-oauth/google";
+import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import shareVideo from "../assets/share.mp4";
