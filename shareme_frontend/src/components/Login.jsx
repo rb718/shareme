@@ -85,7 +85,7 @@ const Login = () => {
           <div className="shadow-2xl">
             {profile ? (
               <div>
-                <img src={profile.picture} alt="user image" />
+                <img src={profile.picture} alt="user photo" />
                 <h3>User Logged in</h3>
                 <p>ID: {profile.id}</p>
                 <p>Name: {profile.name}</p>

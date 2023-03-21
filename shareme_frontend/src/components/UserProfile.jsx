@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineLogout } from "react-icons/ai";
 import { useParams, useNavigate } from "react-router-dom";
-import { googleLogout, GoogleLogin } from "@react-oauth/google";
+import { googleLogout } from "@react-oauth/google";
 
 import {
   userCreatedPinsQuery,
