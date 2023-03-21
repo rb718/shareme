@@ -16,7 +16,6 @@ const Home = () => {
   const scrollRef = useRef(null);
 
   const userInfo = fetchUser;
-  // console.log(userInfo);
 
   useEffect(() => {
     const query = userQuery(userInfo?.id);
